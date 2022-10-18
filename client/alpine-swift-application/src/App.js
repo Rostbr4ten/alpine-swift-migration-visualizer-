@@ -10,29 +10,6 @@ import { Layout, Menu, Switch, Drawer, Button } from 'antd';
 import React, { useState } from 'react';
 import { StaticLines, Lines, Welcome } from './pages';
 const { Header, Content, Footer, Sider } = Layout;
-/*function getItem(label, key, icon, children) {
-  return {
-    key,
-    icon,
-    children,
-    label,
-  };
-}*/
-/*const items = [
-  getItem(<a href="/" target="_self" rel="noopener noreferrer"> Welcome </a>, '1', <CommentOutlined />),
-  getItem(<a href="/StaticLines" target="_self" rel="noopener noreferrer"> Static Lines </a>, '2', <LineOutlined />),
-  getItem(<a href="/Lines" target="_self" rel="noopener noreferrer"> Moving Lines </a>, '3', <ArrowsAltOutlined />),
-];*/
-
-/*
-const items = [
-  getItem('Welcome', '1', <CommentOutlined />),
-  getItem('Static Lines', '2', <LineOutlined />),
-  getItem('Moving Lines', '3', <ArrowsAltOutlined />),
-];*/
-
-
-// works when >=4.20.0, recommended style
 const items = [
   { label: 'Welcome', key: '1', icon: <CommentOutlined /> }, // remember to pass the key prop
   { label: 'Static Lines', key: '2', icon: <LineOutlined /> }, // which is required
@@ -53,6 +30,17 @@ const App = () => {
     setCurrent(e.key);
   };
   const [current, setCurrent] = useState('1');
+  const displayComponent = () => {
+    console.log("TEST");
+    if (current === '1') {
+      return <Welcome />;
+    } else if (current === '2') {
+      return <StaticLines />;
+    } else if (current === '3') {
+      return <Lines />;
+    }
+  };
+
   return (
     <Router>
       <Layout
@@ -78,11 +66,7 @@ const App = () => {
                 minHeight: 360,
               }}
             >
-              <Routes>
-                <Route path="/" exact element={<Welcome />} />
-                <Route path="/Lines" exact element={<Lines />} />
-                <Route path="/StaticLines" exact element={<StaticLines />} />
-              </Routes>
+              {displayComponent()}
             </div>
           </Content>
           <Footer
