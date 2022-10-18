@@ -10,19 +10,35 @@ import { Layout, Menu, Switch, Drawer, Button } from 'antd';
 import React, { useState } from 'react';
 import { StaticLines, Lines, Welcome } from './pages';
 const { Header, Content, Footer, Sider } = Layout;
-function getItem(label, key, icon, children) {
+/*function getItem(label, key, icon, children) {
   return {
     key,
     icon,
     children,
     label,
   };
-}
+}*/
+/*const items = [
+  getItem(<a href="/" target="_self" rel="noopener noreferrer"> Welcome </a>, '1', <CommentOutlined />),
+  getItem(<a href="/StaticLines" target="_self" rel="noopener noreferrer"> Static Lines </a>, '2', <LineOutlined />),
+  getItem(<a href="/Lines" target="_self" rel="noopener noreferrer"> Moving Lines </a>, '3', <ArrowsAltOutlined />),
+];*/
+
+/*
 const items = [
   getItem('Welcome', '1', <CommentOutlined />),
   getItem('Static Lines', '2', <LineOutlined />),
   getItem('Moving Lines', '3', <ArrowsAltOutlined />),
+];*/
+
+
+// works when >=4.20.0, recommended style
+const items = [
+  { label: 'Welcome', key: '1', icon: <CommentOutlined /> }, // remember to pass the key prop
+  { label: 'Static Lines', key: '2', icon: <LineOutlined /> }, // which is required
+  { label: 'Moving Lines', key: '3', icon: <ArrowsAltOutlined /> }, // which is required
 ];
+
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [open, setOpen] = useState(false);
@@ -32,6 +48,11 @@ const App = () => {
   const onClose = () => {
     setOpen(false);
   };
+  const onClickMenu = (e) => {
+    console.log('click ', e);
+    setCurrent(e.key);
+  };
+  const [current, setCurrent] = useState('1');
   return (
     <Router>
       <Layout
@@ -41,7 +62,7 @@ const App = () => {
       >
         <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
           <div className="logo" />
-          <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+          <Menu theme="dark" selectedKeys={[current]} onClick={onClickMenu} mode="inline" items={items} />
 
         </Sider>
         <Layout className="site-layout">
