@@ -1,14 +1,14 @@
 import 'antd/dist/antd.css';
-
+import './App.css';
 import {
-  DesktopOutlined,
-  FileOutlined,
-  PieChartOutlined,
-  TeamOutlined,
-  UserOutlined,
+  ArrowsAltOutlined,
+  CommentOutlined,
+  LineOutlined,
 } from '@ant-design/icons';
-import { Breadcrumb, Layout, Menu } from 'antd';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Layout, Menu, Switch, Drawer, Button } from 'antd';
 import React, { useState } from 'react';
+import { StaticLines, Lines, Welcome } from './pages';
 const { Header, Content, Footer, Sider } = Layout;
 function getItem(label, key, icon, children) {
   return {
@@ -19,162 +19,80 @@ function getItem(label, key, icon, children) {
   };
 }
 const items = [
-  getItem('Option 1', '1', <PieChartOutlined />),
-  getItem('Option 2', '2', <DesktopOutlined />),
-  getItem('User', 'sub1', <UserOutlined />, [
-    getItem('Tom', '3'),
-    getItem('Bill', '4'),
-    getItem('Alex', '5'),
-  ]),
-  getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-  getItem('Files', '9', <FileOutlined />),
+  getItem('Welcome', '1', <CommentOutlined />),
+  getItem('Static Lines', '2', <LineOutlined />),
+  getItem('Moving Lines', '3', <ArrowsAltOutlined />),
 ];
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const [open, setOpen] = useState(false);
+  const showDrawer = () => {
+    setOpen(true);
+  };
+  const onClose = () => {
+    setOpen(false);
+  };
   return (
-    <Layout
-      style={{
-        minHeight: '100vh',
-      }}
-    >
-      <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
-        <div className="logo" />
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
-      </Sider>
-      <Layout className="site-layout">
-        <Header
-          className="site-layout-background"
-          style={{
-            padding: 0,
-          }}
-        />
-        <Content
-          style={{
-            margin: '0 16px',
-          }}
-        >
-          <Breadcrumb
+    <Router>
+      <Layout
+        style={{
+          minHeight: '100vh',
+        }}
+      >
+        <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+          <div className="logo" />
+          <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+
+        </Sider>
+        <Layout className="site-layout">
+          <Content
             style={{
-              margin: '16px 0',
+              margin: '0 16px',
             }}
           >
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
-          </Breadcrumb>
-          <div
-            className="site-layout-background"
+            <div
+              className="site-layout-background"
+              style={{
+                padding: 24,
+                minHeight: 360,
+              }}
+            >
+              <Routes>
+                <Route path="/" exact element={<Welcome />} />
+                <Route path="/Lines" exact element={<Lines />} />
+                <Route path="/StaticLines" exact element={<StaticLines />} />
+              </Routes>
+            </div>
+          </Content>
+          <Footer
             style={{
-              padding: 24,
-              minHeight: 360,
+              textAlign: 'center',
             }}
           >
-            Bill is a cat.
-          </div>
-        </Content>
-        <Footer
-          style={{
-            textAlign: 'center',
-          }}
-        >
-          Ant Design ©2018 Created by Ant UED
-        </Footer>
+            <div
+              className="button-filter"
+              style={{
+                textAlign: 'right',
+              }}
+            >
+              <Button type="primary" onClick={showDrawer}>
+                Filter
+              </Button>
+              <Drawer title="Basic Drawer" /*placement="right"*/ onClose={onClose} open={open}>
+                <p>Content</p>
+              </Drawer>
+            </div>
+            ©2022{' '}
+            <a href="https://github.com/Rostbr4ten/alpine-swift-migration-visualizer-" target="_blank" rel="noopener noreferrer">
+              [Sourcecode] {' '}
+            </a>
+            <a href="https://www.movebank.org/cms/webapp?gwt_fragment=page%3Dstudies%2Cpath%3Dstudy1266783506" target="_blank" rel="noopener noreferrer">
+              [Bird data]
+            </a>
+          </Footer>
+        </Layout>
       </Layout>
-    </Layout>
+    </Router>
   );
 };
 export default App;
-
-/*import {
-    MenuFoldOutlined,
-    MenuUnfoldOutlined,
-    UploadOutlined,
-    UserOutlined,
-    VideoCameraOutlined,
-  } from '@ant-design/icons';
-  import { Layout, Menu } from 'antd';
-  import React, { useState } from 'react';
-  const { Header, Sider, Content } = Layout;
-  const App = () => {
-    const [collapsed, setCollapsed] = useState(false);
-    return (
-      <Layout>
-        <Sider trigger={null} collapsible collapsed={collapsed}>
-          <div className="logo" />
-          <Menu
-            theme="dark"
-            mode="inline"
-            defaultSelectedKeys={['1']}
-            items={[
-              {
-                key: '1',
-                icon: <UserOutlined />,
-                label: 'nav 1',
-              },
-              {
-                key: '2',
-                icon: <VideoCameraOutlined />,
-                label: 'nav 2',
-              },
-              {
-                key: '3',
-                icon: <UploadOutlined />,
-                label: 'nav 3',
-              },
-            ]}
-          />
-        </Sider>
-        <Layout className="site-layout">
-          <Header
-            className="site-layout-background"
-            style={{
-              padding: 0,
-            }}
-          >
-            {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-              className: 'trigger',
-              onClick: () => setCollapsed(!collapsed),
-            })}
-          </Header>
-          <Content
-            className="site-layout-background"
-            style={{
-              margin: '24px 16px',
-              padding: 24,
-              minHeight: 280,
-            }}
-          >
-            Content
-          </Content>
-        </Layout>
-      </Layout>
-    );
-  };
-  export default App;
-*/
-
-/*import logo from './logo.svg';
-import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React <br></br>
-          Layout Komponente erstmal simpel gestalten mit Sider und Bar, und Routing
-        </a>
-      </header>
-    </div> 
-  );
-}
-
-export default App;*/
