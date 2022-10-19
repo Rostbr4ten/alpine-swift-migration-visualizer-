@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Layout, Menu, Switch, Drawer, Button } from 'antd';
 import React, { useState } from 'react';
 import { StaticLines, Lines, Welcome } from './pages';
+import { Datepicker } from './components';
 const { Header, Content, Footer, Sider } = Layout;
 const items = [
   { label: 'Welcome', key: '1', icon: <CommentOutlined /> }, // remember to pass the key prop
@@ -31,7 +32,7 @@ const App = () => {
   };
   const [current, setCurrent] = useState('1');
   const displayComponent = () => {
-    console.log("TEST");
+    console.log(Datepicker.dates)
     if (current === '1') {
       return <Welcome />;
     } else if (current === '2') {
@@ -83,8 +84,8 @@ const App = () => {
               <Button type="primary" onClick={showDrawer}>
                 Filter
               </Button>
-              <Drawer title="Basic Drawer" /*placement="right"*/ onClose={onClose} open={open}>
-                <p>Content</p>
+              <Drawer title="Filter dates" placement="right" onClose={onClose} open={open}>
+                <Datepicker />
               </Drawer>
             </div>
             ©2022{' '}

@@ -1,0 +1,3 @@
+nodemon install --globally
+
+dont forget /api/ before calls
