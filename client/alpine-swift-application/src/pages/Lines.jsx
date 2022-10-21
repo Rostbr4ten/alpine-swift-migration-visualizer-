@@ -37,12 +37,12 @@ const Lines = () => {
         setdata(
             res.data.data.map((row) => ({
                 //Csv needs those names on the right side
-                timestamp: row.time,
+                arcLabel: row.time,
                 startLat: row.lat1,
                 startLng: row.lng1,
                 endLat: row.lat2,
                 endLng: row.lng2,
-                color: [['red', 'white', 'blue', 'green'][Math.round(Math.random() * 3)], ['red', 'white', 'blue', 'green'][Math.round(Math.random() * 3)]]
+                color: [['red', 'white', 'blue', 'green'][0], ['red', 'white', 'blue', 'green'][2]]
             }))
         );
     };
@@ -64,9 +64,12 @@ const Lines = () => {
             arcsData={data}
             arcLabel={data.timestamp}
             arcColor={'color'}
-            arcDashLength={() => Math.random()}
+            /*arcDashLength={() => Math.random()}
             arcDashGap={() => Math.random()}
-            arcDashAnimateTime={() => Math.random() * 4000 + 500}
+            arcDashAnimateTime={() => Math.random() * 4000 + 500}*/
+            arcDashLength={() => 0.5}
+            arcDashGap={() => 0.5}
+            arcDashAnimateTime={() => 2000}
         />
 
     );
