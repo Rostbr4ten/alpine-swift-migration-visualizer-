@@ -1,41 +1,73 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import 'antd/dist/antd.css';
 import api from '../api'
+import Globe from 'react-globe.gl';
 
 const Lines = () => {
-
+    const globeEl = useRef();
+    const OPACITY = 0.22;
+    const N = 20;
+    const arcsData = [...Array(N).keys()].map(() => ({
+        startLat: (Math.random() - 0.5) * 180,
+        startLng: (Math.random() - 0.5) * 360,
+        endLat: (Math.random() - 0.5) * 180,
+        endLng: (Math.random() - 0.5) * 360,
+        color: [['red', 'white', 'blue', 'green'][Math.round(Math.random() * 3)], ['red', 'white', 'blue', 'green'][Math.round(Math.random() * 3)]]
+      }));
     // data = get all datasets
     const [data, setdata] = useState([]);
-    const [longitude, setlongitude] = useState(0);
-    const [latitude, setlatitude] = useState(0);
 
     // Is immediatly triggered, fills data up
     useEffect(() => {
+       /* data[0].lat = 0;
+        data[0].lng = 0;
+        data[1].lat = 0;
+        data[1].lng = 0; */
+        console.log("ArcsData");
+        console.log(arcsData);
         getData();
         setLatandLong();
+        globeEl.current.pointOfView({ lat: 45.8, lng: 17.3, altitude: 0.7 });
     }, []);
 
     const getData = async () => {
         const res = await api.getBirdRoutes();
-        console.log("InGetData");
-        console.log(res.data.data);
+        //console.log("InGetData");
+        //console.log(res.data.data);
         setdata(
             res.data.data.map((row) => ({
                 //Csv needs those names on the right side
-                longitude: row.longitude,
-                latitude: row.latitude
+                timestamp: row.time,
+                startLat: row.lat1,
+                startLng: row.lng1,
+                endLat: row.lat2,
+                endLng: row.lng2,
+                color: [['red', 'white', 'blue', 'green'][Math.round(Math.random() * 3)], ['red', 'white', 'blue', 'green'][Math.round(Math.random() * 3)]]
             }))
         );
     };
 
     const setLatandLong = () => {
-        //console.log(data);
+        console.log("DATA")
+        console.log(data);
     };
 
-    console.log(data);
+    console.log(data[0]);
 
+    if(data.length > 1){
+        
+    }
     return (
-        <p>Lines HERE</p>
+        <Globe
+            ref={globeEl}
+            globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
+            arcsData={data}
+            arcLabel={data.timestamp}
+            arcColor={'color'}
+            arcDashLength={() => Math.random()}
+            arcDashGap={() => Math.random()}
+            arcDashAnimateTime={() => Math.random() * 4000 + 500}
+        />
 
     );
 };
