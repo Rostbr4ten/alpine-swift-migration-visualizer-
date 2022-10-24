@@ -5,6 +5,7 @@ import Globe from 'react-globe.gl';
 
 const Lines = () => {
     const globeEl = useRef();
+    const [hoverArc, setHoverArc] = useState();
     const OPACITY = 0.22;
     const N = 20;
     const arcsData = [...Array(N).keys()].map(() => ({
@@ -37,7 +38,7 @@ const Lines = () => {
         setdata(
             res.data.data.map((row) => ({
                 //Csv needs those names on the right side
-                arcLabel: row.time,
+                timestamp: row.time,
                 startLat: row.lat1,
                 startLng: row.lng1,
                 endLat: row.lat2,
@@ -61,15 +62,19 @@ const Lines = () => {
         <Globe
             ref={globeEl}
             globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
+            backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
             arcsData={data}
-            arcLabel={data.timestamp}
+            arcLabel={'timestamp'}
             arcColor={'color'}
-            /*arcDashLength={() => Math.random()}
-            arcDashGap={() => Math.random()}
-            arcDashAnimateTime={() => Math.random() * 4000 + 500}*/
+            // Highlight nodes
+            /*arcColor={d => {
+                const op = !hoverArc ? OPACITY : d === hoverArc ? 0.9 : OPACITY / 4;
+                return [`rgba(0, 255, 0, ${op})`, `rgba(255, 0, 0, ${op})`];
+              }}*/
             arcDashLength={() => 0.5}
             arcDashGap={() => 0.5}
             arcDashAnimateTime={() => 2000}
+            onArcHover={setHoverArc}
         />
 
     );

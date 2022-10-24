@@ -19,15 +19,20 @@ getBirdRoutes = (req, res) => {
 
             console.log(resultObject);
 
+            // If aufrufparamter 4 Stellen, filtern nach local identifier
+            // if 8 Stellen, Filter nach Zug (20142015 usw)
+
             for (let i = 0; i < (resultObject.length - 1); i++) {
                 //console.log(String(resultObject[i].timestamp));
-                if (String(resultObject[i].timestamp).includes("2015") && String(resultObject[i].tagLocalIdentifier).includes("19JD") && String(resultObject[i].individualLocalIdentifier).includes("F62412")
+                if (String(resultObject[i].tagLocalIdentifier).includes("19JD") /*&& (String(resultObject[i].timestamp).includes("2015") || String(resultObject[i].timestamp).includes("2016")) && String(resultObject[i].individualLocalIdentifier).includes("F62412")*/
                 ) { // && String(resultObject[i].latitude) != String(resultObject[i+1].latitude) && String(resultObject[i].longitude) != String(resultObject[i+1].longitude)
                     // Killing equals might result in problems if the bird does something like a day trip and returns. then it looks like the data is broken
-                    var tmpRoute = { lat1: resultObject[i].latitude, lng1:resultObject[i].longitude, 
-                        lat2: resultObject[i+1].latitude, lng2: resultObject[i+1].longitude,
-                        time: resultObject[i].timestamp };
-                        birdRoutes.push(tmpRoute);
+                    var tmpRoute = {
+                        lat1: resultObject[i].latitude, lng1: resultObject[i].longitude,
+                        lat2: resultObject[i + 1].latitude, lng2: resultObject[i + 1].longitude,
+                        time: resultObject[i].tagLocalIdentifier + ": " + resultObject[i].timestamp
+                    };
+                    birdRoutes.push(tmpRoute);
                 }
             }
 
@@ -42,6 +47,23 @@ getBirdRoutes = (req, res) => {
     }*/
 }
 
+getBirdFilterPossibilities = (req, res) => {
+    var resultObject = [];
+    const tagLocalIdentifier = new Set();
+    fs.createReadStream("./storedData/BirdsSwitzerland_0.csv")
+        .pipe(csv())
+        .on("data", (data) => resultObject.push(data))
+        .on("end", () => {
+            console.log("Let's roll");
+            //console.log(resultObject);
+            for (let i = 0; i < (resultObject.length - 1); i++) {
+                tagLocalIdentifier.add(resultObject[i].tagLocalIdentifier);
+            }
+            return res.status(200).json({ success: true, data: Array.from(tagLocalIdentifier) });
+        });
+}
+
 module.exports = {
-    getBirdRoutes
+    getBirdRoutes,
+    getBirdFilterPossibilities
 }

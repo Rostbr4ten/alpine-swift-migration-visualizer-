@@ -6,11 +6,13 @@ import {
   LineOutlined,
 } from '@ant-design/icons';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Layout, Menu, Switch, Drawer, Button } from 'antd';
-import React, { useState } from 'react';
+import { Layout, Menu, Switch, Drawer, Button, Select } from 'antd';
+import React, { useState, useEffect } from 'react';
 import { StaticLines, Lines, Welcome } from './pages';
 import { Datepicker } from './components';
+import api from './api'
 const { Header, Content, Footer, Sider } = Layout;
+const { Option, OptGroup } = Select;
 const items = [
   { label: 'Welcome', key: '1', icon: <CommentOutlined /> }, // remember to pass the key prop
   { label: 'Static Lines', key: '2', icon: <LineOutlined /> }, // which is required
@@ -30,9 +32,33 @@ const App = () => {
     console.log('click ', e);
     setCurrent(e.key);
   };
+  const handleChangeSelect = (value) => {
+    console.log(`selected ${value}`);
+  };
   const [current, setCurrent] = useState('1');
+  const [birds, setBirds] = useState([]);
+
+  useEffect(() => {
+    getBirds();
+    console.log("BIRDS");
+    console.log(birds);
+  }, []);
+
+  const getBirds = async () => {
+    const res = await api.getBirdFilters();
+    //console.log("InGetData");
+    //console.log(res.data.data);
+    setBirds(
+      res.data.data.map((row) => ({
+        //Csv needs those names on the right side
+        bird: row
+      }))
+    );
+  };
+
+
   const displayComponent = () => {
-    console.log(Datepicker.dates)
+    //console.log(Datepicker.dates)
     if (current === '1') {
       return <Welcome />;
     } else if (current === '2') {
@@ -85,7 +111,22 @@ const App = () => {
                 Filter
               </Button>
               <Drawer title="Filter dates" placement="right" onClose={onClose} open={open}>
-                <Datepicker />
+                <Select
+                  defaultValue="12IS"
+                  style={{
+                    width: 200,
+                  }}
+                  onChange={handleChangeSelect}
+                >
+                  <OptGroup label="Bird">
+                    {birds.map((item, index) => <Select.Option value={item.bird} key={index}>{item.bird}</Select.Option>)}
+                  </OptGroup>
+                  <OptGroup label="Year">
+                    <Option value="2014-2015">2014 - 2015</Option>
+                    <Option value="2015-2016">2015 - 2016</Option>
+                    <Option value="2016-2017">2016 - 2017</Option>
+                  </OptGroup>
+                </Select>
               </Drawer>
             </div>
             ©2022{' '}
@@ -102,3 +143,5 @@ const App = () => {
   );
 };
 export default App;
+
+// <Datepicker /> in Drawer
