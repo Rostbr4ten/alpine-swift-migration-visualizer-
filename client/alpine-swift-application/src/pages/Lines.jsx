@@ -3,61 +3,55 @@ import 'antd/dist/antd.css';
 import api from '../api'
 import Globe from 'react-globe.gl';
 
-const Lines = () => {
+const Lines = ( {filter} ) => {
     const globeEl = useRef();
     const [hoverArc, setHoverArc] = useState();
-    const OPACITY = 0.22;
-    const N = 20;
-    const arcsData = [...Array(N).keys()].map(() => ({
-        startLat: (Math.random() - 0.5) * 180,
-        startLng: (Math.random() - 0.5) * 360,
-        endLat: (Math.random() - 0.5) * 180,
-        endLng: (Math.random() - 0.5) * 360,
-        color: [['red', 'white', 'blue', 'green'][Math.round(Math.random() * 3)], ['red', 'white', 'blue', 'green'][Math.round(Math.random() * 3)]]
-      }));
     // data = get all datasets
     const [data, setdata] = useState([]);
+    const [filteredData, setFilteredData] = useState([]);
 
     // Is immediatly triggered, fills data up
     useEffect(() => {
-       /* data[0].lat = 0;
-        data[0].lng = 0;
-        data[1].lat = 0;
-        data[1].lng = 0; */
-        console.log("ArcsData");
-        console.log(arcsData);
         getData();
-        setLatandLong();
         globeEl.current.pointOfView({ lat: 45.8, lng: 17.3, altitude: 0.7 });
     }, []);
 
     const getData = async () => {
+        console.log("Filter in Lines");
+        console.log(filter);
         const res = await api.getBirdRoutes();
-        //console.log("InGetData");
-        //console.log(res.data.data);
         setdata(
-            res.data.data.map((row) => ({
+            res.data.data.filter(row => row.tagLocalIdentifier.includes(filter)).
+            map((row) => ({
                 //Csv needs those names on the right side
                 timestamp: row.time,
                 startLat: row.lat1,
                 startLng: row.lng1,
                 endLat: row.lat2,
                 endLng: row.lng2,
+                id: row.tagLocalIdentifier,
                 color: [['red', 'white', 'blue', 'green'][0], ['red', 'white', 'blue', 'green'][2]]
             }))
         );
+        //filterData(data);
     };
 
-    const setLatandLong = () => {
-        console.log("DATA")
+    
+    const filterData = (data) => {
+        console.log("Filter Data!");
+        console.log(filter);
         console.log(data);
     };
+    /*
 
-    console.log(data[0]);
+    // Map the ids of datasets and mlmodels stored in training configs to their names
+    const trainingConfigMoreInfo = trainingConfig.map(training => ({
+        ...training,
+        dataset_name: datasets.find(dataset => dataset._id == training.dataset_id)?.name,
+        ml_model_name: mlmodels.find(mlmodel => mlmodel._id == training.ml_model_id)?.name,
+    }));
+    */
 
-    if(data.length > 1){
-        
-    }
     return (
         <Globe
             ref={globeEl}

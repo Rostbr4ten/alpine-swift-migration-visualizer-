@@ -22,6 +22,7 @@ const items = [
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [open, setOpen] = useState(false);
+  const [birdF, setBirdF] = useState("12IS");
   const showDrawer = () => {
     setOpen(true);
   };
@@ -34,14 +35,14 @@ const App = () => {
   };
   const handleChangeSelect = (value) => {
     console.log(`selected ${value}`);
+    setBirdF(value);
+    displayComponent(value);
   };
   const [current, setCurrent] = useState('1');
   const [birds, setBirds] = useState([]);
 
   useEffect(() => {
     getBirds();
-    console.log("BIRDS");
-    console.log(birds);
   }, []);
 
   const getBirds = async () => {
@@ -57,14 +58,14 @@ const App = () => {
   };
 
 
-  const displayComponent = () => {
+  const displayComponent = ( filter ) => {
     //console.log(Datepicker.dates)
     if (current === '1') {
       return <Welcome />;
     } else if (current === '2') {
       return <StaticLines />;
     } else if (current === '3') {
-      return <Lines />;
+      return <Lines filter={ filter } />;
     }
   };
 
@@ -93,7 +94,7 @@ const App = () => {
                 minHeight: 360,
               }}
             >
-              {displayComponent()}
+              {displayComponent(birdF)}
             </div>
           </Content>
           <Footer
