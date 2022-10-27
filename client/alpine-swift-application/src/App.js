@@ -11,6 +11,7 @@ import React, { useState, useEffect } from 'react';
 import { StaticLines, Lines, Welcome } from './pages';
 import { Datepicker } from './components';
 import api from './api'
+import {reactLocalStorage} from 'reactjs-localstorage';
 const { Header, Content, Footer, Sider } = Layout;
 const { Option, OptGroup } = Select;
 const items = [
@@ -22,7 +23,9 @@ const items = [
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [open, setOpen] = useState(false);
-  const [birdF, setBirdF] = useState("12IS");
+  const [birdF, setBirdF] = React.useState(
+    localStorage.getItem('birdF') || "12IS"
+  );
   const showDrawer = () => {
     setOpen(true);
   };
@@ -32,13 +35,17 @@ const App = () => {
   const onClickMenu = (e) => {
     console.log('click ', e);
     setCurrent(e.key);
+    localStorage.setItem('current', e.key);
   };
   const handleChangeSelect = (value) => {
     console.log(`selected ${value}`);
     setBirdF(value);
+    localStorage.setItem('birdF', value);
     displayComponent(value);
   };
-  const [current, setCurrent] = useState('1');
+  const [current, setCurrent] = React.useState(
+    localStorage.getItem('current') || '1'
+  );
   const [birds, setBirds] = useState([]);
 
   useEffect(() => {
@@ -65,7 +72,7 @@ const App = () => {
     } else if (current === '2') {
       return <StaticLines />;
     } else if (current === '3') {
-      return <Lines filter={ filter } />;
+      return <Lines filter={ birdF } />;
     }
   };
 
