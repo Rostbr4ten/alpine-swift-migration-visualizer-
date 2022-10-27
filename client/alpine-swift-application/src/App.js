@@ -11,7 +11,6 @@ import React, { useState, useEffect } from 'react';
 import { StaticLines, Lines, Welcome } from './pages';
 import { Datepicker } from './components';
 import api from './api'
-import {reactLocalStorage} from 'reactjs-localstorage';
 const { Header, Content, Footer, Sider } = Layout;
 const { Option, OptGroup } = Select;
 const items = [
@@ -65,14 +64,13 @@ const App = () => {
   };
 
 
-  const displayComponent = ( filter ) => {
-    //console.log(Datepicker.dates)
+  const displayComponent = (filter) => {
     if (current === '1') {
       return <Welcome />;
     } else if (current === '2') {
       return <StaticLines />;
     } else if (current === '3') {
-      return <Lines filter={ birdF } />;
+      return <Lines filter={birdF} />;
     }
   };
 
@@ -135,6 +133,9 @@ const App = () => {
                     <Option value="2016-2017">2016 - 2017</Option>
                   </OptGroup>
                 </Select>
+                <Button type='primary' block onClick={() => window.location.reload(false)}>
+                  Apply
+                </Button>
               </Drawer>
             </div>
             ©2022{' '}
