@@ -17,8 +17,6 @@ getBirdRoutes = (req, res) => {
             // go on
             // return
 
-            console.log(resultObject);
-
             // If aufrufparamter 4 Stellen, filtern nach local identifier
             // if 8 Stellen, Filter nach Zug (20142015 usw)
 
@@ -35,9 +33,6 @@ getBirdRoutes = (req, res) => {
                 }
             }
 
-            console.log("BIRDROUTES");
-            console.log(birdRoutes)
-
             return res.status(200).json({ success: true, data: birdRoutes });
         });
     // Error Handling in the future
@@ -53,8 +48,6 @@ getBirdFilterPossibilities = (req, res) => {
         .pipe(csv())
         .on("data", (data) => resultObject.push(data))
         .on("end", () => {
-            console.log("Let's roll");
-            //console.log(resultObject);
             for (let i = 0; i < (resultObject.length - 1); i++) {
                 tagLocalIdentifier.add(resultObject[i].tagLocalIdentifier);
             }

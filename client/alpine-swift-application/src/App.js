@@ -23,7 +23,7 @@ const App = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [open, setOpen] = useState(false);
   const [birdF, setBirdF] = React.useState(
-    localStorage.getItem('birdF') || "12IS"
+    localStorage.getItem('birdF') || "FillterEmptyValue"
   );
   const showDrawer = () => {
     setOpen(true);
@@ -64,7 +64,7 @@ const App = () => {
   };
 
 
-  const displayComponent = (filter) => {
+  const displayComponent = () => {
     if (current === '1') {
       return <Welcome />;
     } else if (current === '2') {
@@ -99,7 +99,7 @@ const App = () => {
                 minHeight: 360,
               }}
             >
-              {displayComponent(birdF)}
+              {displayComponent()}
             </div>
           </Content>
           <Footer
@@ -118,7 +118,6 @@ const App = () => {
               </Button>
               <Drawer title="Filter dates" placement="right" onClose={onClose} open={open}>
                 <Select
-                  defaultValue="12IS"
                   style={{
                     width: 200,
                   }}

@@ -20,19 +20,42 @@ const Lines = ( {filter} ) => {
         console.log("Filter in Lines");
         console.log(filter);
         const res = await api.getBirdRoutes();
-        setdata(
-            res.data.data.filter(row => row.tagLocalIdentifier.includes(filter)).
-            map((row) => ({
-                //Csv needs those names on the right side
-                timestamp: row.time,
-                startLat: row.lat1,
-                startLng: row.lng1,
-                endLat: row.lat2,
-                endLng: row.lng2,
-                id: row.tagLocalIdentifier,
-                color: [['red', 'white', 'blue', 'green'][0], ['red', 'white', 'blue', 'green'][2]]
-            }))
-        );
+        if(filter.length == 4){
+            setdata(
+                res.data.data.filter(row => row.tagLocalIdentifier.includes(filter)).
+                map((row) => ({
+                    //Csv needs those names on the right side
+                    timestamp: row.time,
+                    startLat: row.lat1,
+                    startLng: row.lng1,
+                    endLat: row.lat2,
+                    endLng: row.lng2,
+                    id: row.tagLocalIdentifier,
+                    color: [['red', 'white', 'blue', 'green'][0], ['red', 'white', 'blue', 'green'][2]]
+                }))
+            );
+        } else if (filter.length == 9){
+            console.log("Check for year");
+            var years = filter.split('-');
+            var regexYears = /2014-(08|09|10|11|12)-|2015-(01|02|03|04|05)-/;
+            var yearFilter = new RegExp(years[0] + '-(08|09|10|11|12)-|' + years[1] + '-(01|02|03|04|05)-')
+            setdata(
+                res.data.data.filter(row => yearFilter.test(row.time)).
+                map((row) => ({
+                    //Csv needs those names on the right side
+                    timestamp: row.time,
+                    startLat: row.lat1,
+                    startLng: row.lng1,
+                    endLat: row.lat2,
+                    endLng: row.lng2,
+                    id: row.tagLocalIdentifier,
+                    color: [['red', 'white', 'blue', 'green'][0], ['red', 'white', 'blue', 'green'][2]]
+                }))
+            );
+        } else {
+            setdata(0);
+        }
+        
         //filterData(data);
     };
 
@@ -57,6 +80,10 @@ const Lines = ( {filter} ) => {
             ref={globeEl}
             globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
             backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
+            /*            
+            globeImageUrl="..\..\..\..\..\server\storedData\earth-night.jpg"
+            backgroundImageUrl="..\..\..\..\..\server\storedData\night-sky.png"
+            */
             arcsData={data}
             arcLabel={'timestamp'}
             arcColor={'color'}
