@@ -22,7 +22,9 @@ const items = [
 const App = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [open, setOpen] = useState(false);
-  const [birdF, setBirdF] = useState("12IS");
+  const [birdF, setBirdF] = React.useState(
+    localStorage.getItem('birdF') || "FillterEmptyValue"
+  );
   const showDrawer = () => {
     setOpen(true);
   };
@@ -32,13 +34,17 @@ const App = () => {
   const onClickMenu = (e) => {
     console.log('click ', e);
     setCurrent(e.key);
+    localStorage.setItem('current', e.key);
   };
   const handleChangeSelect = (value) => {
     console.log(`selected ${value}`);
     setBirdF(value);
+    localStorage.setItem('birdF', value);
     displayComponent(value);
   };
-  const [current, setCurrent] = useState('1');
+  const [current, setCurrent] = React.useState(
+    localStorage.getItem('current') || '1'
+  );
   const [birds, setBirds] = useState([]);
 
   useEffect(() => {
@@ -58,14 +64,13 @@ const App = () => {
   };
 
 
-  const displayComponent = ( filter ) => {
-    //console.log(Datepicker.dates)
+  const displayComponent = () => {
     if (current === '1') {
       return <Welcome />;
     } else if (current === '2') {
       return <StaticLines />;
     } else if (current === '3') {
-      return <Lines filter={ filter } />;
+      return <Lines filter={birdF} />;
     }
   };
 
@@ -94,7 +99,7 @@ const App = () => {
                 minHeight: 360,
               }}
             >
-              {displayComponent(birdF)}
+              {displayComponent()}
             </div>
           </Content>
           <Footer
@@ -113,7 +118,6 @@ const App = () => {
               </Button>
               <Drawer title="Filter dates" placement="right" onClose={onClose} open={open}>
                 <Select
-                  defaultValue="12IS"
                   style={{
                     width: 200,
                   }}
@@ -128,6 +132,9 @@ const App = () => {
                     <Option value="2016-2017">2016 - 2017</Option>
                   </OptGroup>
                 </Select>
+                <Button type='primary' block onClick={() => window.location.reload(false)}>
+                  Apply
+                </Button>
               </Drawer>
             </div>
             ©2022{' '}
