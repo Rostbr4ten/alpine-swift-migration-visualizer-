@@ -6,5 +6,6 @@ const router = express.Router()
 
 router.get('/birdRoutes', BirdCtrl.getBirdRoutes)
 router.get('/birdFilters', BirdCtrl.getBirdFilterPossibilities)
+router.get('/birdPaths', BirdCtrl.getBirdPaths)
 
 module.exports = router

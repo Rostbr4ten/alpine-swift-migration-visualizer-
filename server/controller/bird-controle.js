@@ -41,6 +41,35 @@ getBirdRoutes = (req, res) => {
     }*/
 }
 
+getBirdPaths = (req, res) => {
+    var resultObject = [];
+    var birdRoutes = [];
+    fs.createReadStream("./storedData/BirdsSwitzerland_0.csv")
+        .pipe(csv())
+        .on("data", (data) => resultObject.push(data))
+        .on("end", () => {
+            for (let i = 0; i < (resultObject.length); i++) {
+                //console.log(String(resultObject[i].timestamp));
+                if (String(resultObject[i].tagLocalIdentifier)) {
+                    var tmpRoute = {
+                        lat: resultObject[i].latitude, 
+                        lng: resultObject[i].longitude,
+                        alt: 0.4,
+                        time: resultObject[i].tagLocalIdentifier + ": " + resultObject[i].timestamp,
+                        tagLocalIdentifier: resultObject[i].tagLocalIdentifier
+                    };
+                    birdRoutes.push(tmpRoute);
+                }
+            }
+
+            return res.status(200).json({ success: true, data: birdRoutes });
+        });
+    // Error Handling in the future
+    /*if (resultObject.length == []) {
+        return res.status(404).json({ success: false, data: "Probem in CSV Parsing" });
+    }*/
+}
+
 getBirdFilterPossibilities = (req, res) => {
     var resultObject = [];
     const tagLocalIdentifier = new Set();
@@ -57,5 +86,6 @@ getBirdFilterPossibilities = (req, res) => {
 
 module.exports = {
     getBirdRoutes,
+    getBirdPaths,
     getBirdFilterPossibilities
 }

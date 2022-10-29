@@ -4,11 +4,12 @@ import {
   ArrowsAltOutlined,
   CommentOutlined,
   LineOutlined,
+  LogoutOutlined,
 } from '@ant-design/icons';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Layout, Menu, Switch, Drawer, Button, Select } from 'antd';
 import React, { useState, useEffect } from 'react';
-import { StaticLines, Lines, Welcome } from './pages';
+import { StaticLines, Lines, Welcome, PathLines } from './pages';
 import { Datepicker } from './components';
 import api from './api'
 const { Header, Content, Footer, Sider } = Layout;
@@ -17,6 +18,7 @@ const items = [
   { label: 'Welcome', key: '1', icon: <CommentOutlined /> }, // remember to pass the key prop
   { label: 'Static Lines', key: '2', icon: <LineOutlined /> }, // which is required
   { label: 'Moving Lines', key: '3', icon: <ArrowsAltOutlined /> }, // which is required
+  { label: 'PathLines', key: '4', icon: <LogoutOutlined /> }, // which is required
 ];
 
 const App = () => {
@@ -71,6 +73,8 @@ const App = () => {
       return <StaticLines />;
     } else if (current === '3') {
       return <Lines filter={birdF} />;
+    } else if (current === '4') {
+      return <PathLines filter={birdF} />;
     }
   };
 

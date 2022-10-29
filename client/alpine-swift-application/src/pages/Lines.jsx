@@ -3,77 +3,58 @@ import 'antd/dist/antd.css';
 import api from '../api'
 import Globe from 'react-globe.gl';
 
-const Lines = ( {filter} ) => {
+const Lines = ({ filter }) => {
     const globeEl = useRef();
     const [hoverArc, setHoverArc] = useState();
-    // data = get all datasets
     const [data, setdata] = useState([]);
-    const [filteredData, setFilteredData] = useState([]);
-
-    // Is immediatly triggered, fills data up
-    useEffect(() => {
-        getData();
-        globeEl.current.pointOfView({ lat: 45.8, lng: 17.3, altitude: 0.7 });
-    }, []);
 
     const getData = async () => {
         console.log("Filter in Lines");
         console.log(filter);
         const res = await api.getBirdRoutes();
-        if(filter.length == 4){
+        if (filter.length == 4) {
             setdata(
                 res.data.data.filter(row => row.tagLocalIdentifier.includes(filter)).
-                map((row) => ({
-                    //Csv needs those names on the right side
-                    timestamp: row.time,
-                    startLat: row.lat1,
-                    startLng: row.lng1,
-                    endLat: row.lat2,
-                    endLng: row.lng2,
-                    id: row.tagLocalIdentifier,
-                    color: [['red', 'white', 'blue', 'green'][0], ['red', 'white', 'blue', 'green'][2]]
-                }))
+                    map((row) => ({
+                        //Csv needs those names on the right side
+                        timestamp: row.time,
+                        startLat: row.lat1,
+                        startLng: row.lng1,
+                        endLat: row.lat2,
+                        endLng: row.lng2,
+                        id: row.tagLocalIdentifier,
+                        color: [['red', 'white', 'blue', 'green'][0], ['red', 'white', 'blue', 'green'][2]]
+                    }))
             );
-        } else if (filter.length == 9){
+        } else if (filter.length == 9) {
             console.log("Check for year");
             var years = filter.split('-');
             var regexYears = /2014-(08|09|10|11|12)-|2015-(01|02|03|04|05)-/;
             var yearFilter = new RegExp(years[0] + '-(08|09|10|11|12)-|' + years[1] + '-(01|02|03|04|05)-')
             setdata(
                 res.data.data.filter(row => yearFilter.test(row.time)).
-                map((row) => ({
-                    //Csv needs those names on the right side
-                    timestamp: row.time,
-                    startLat: row.lat1,
-                    startLng: row.lng1,
-                    endLat: row.lat2,
-                    endLng: row.lng2,
-                    id: row.tagLocalIdentifier,
-                    color: [['red', 'white', 'blue', 'green'][0], ['red', 'white', 'blue', 'green'][2]]
-                }))
+                    map((row) => ({
+                        //Csv needs those names on the right side
+                        timestamp: row.time,
+                        startLat: row.lat1,
+                        startLng: row.lng1,
+                        endLat: row.lat2,
+                        endLng: row.lng2,
+                        id: row.tagLocalIdentifier,
+                        color: [['red', 'white', 'blue', 'green'][0], ['red', 'white', 'blue', 'green'][2]]
+                    }))
             );
         } else {
             setdata(0);
         }
-        
-        //filterData(data);
     };
 
-    
-    const filterData = (data) => {
-        console.log("Filter Data!");
-        console.log(filter);
+    // Is immediatly triggered, fills data up
+    useEffect(() => {
+        getData();
+        globeEl.current.pointOfView({ lat: 45.8, lng: 17.3, altitude: 0.7 });
         console.log(data);
-    };
-    /*
-
-    // Map the ids of datasets and mlmodels stored in training configs to their names
-    const trainingConfigMoreInfo = trainingConfig.map(training => ({
-        ...training,
-        dataset_name: datasets.find(dataset => dataset._id == training.dataset_id)?.name,
-        ml_model_name: mlmodels.find(mlmodel => mlmodel._id == training.ml_model_id)?.name,
-    }));
-    */
+    }, []);
 
     return (
         <Globe

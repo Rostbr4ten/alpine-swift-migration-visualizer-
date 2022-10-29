@@ -6,12 +6,14 @@ const api = axios.create({
 
 export const getBirdRoutes = () => api.get(`/birdRoutes`);
 export const getBirdFilters = () => api.get(`/birdFilters`)
+export const getBirdPaths = () => api.get(`/birdPaths`)
 //export const insertFormOne = payload => api.post(`/insertFormOne`, payload)
 
 
 const apis = {
     getBirdRoutes,
-    getBirdFilters
+    getBirdFilters,
+    getBirdPaths
 }
 
 export default apis
