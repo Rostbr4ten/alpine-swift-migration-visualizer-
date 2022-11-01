@@ -75,6 +75,8 @@ const Marker = ({ filter }) => {
 
     return (
         <Globe
+            width={1000}
+            height={640}
             bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
             globeImageUrl="https://raw.githubusercontent.com/chrisrzhou/react-globe/main/textures/globe.jpg"
             backgroundImageUrl="https://raw.githubusercontent.com/chrisrzhou/react-globe/main/textures/background_milky_way.jpg"
@@ -83,8 +85,8 @@ const Marker = ({ filter }) => {
             labelLat={d => d.lat}
             labelLng={d => d.lng}
             labelText={d => d.time}
-            labelSize={ 1 }
-            labelDotRadius={ 1 }
+            labelSize={1}
+            labelDotRadius={1}
             labelColor={() => 'rgba(255, 165, 0, 0.75)'}
             labelResolution={2}
         />
