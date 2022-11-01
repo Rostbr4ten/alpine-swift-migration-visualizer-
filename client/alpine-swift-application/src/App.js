@@ -70,7 +70,7 @@ const App = () => {
     if (current === '1') {
       return <Welcome />;
     } else if (current === '2') {
-      return <StaticLines />;
+      return <StaticLines filter={birdF} />;
     } else if (current === '3') {
       return <Lines filter={birdF} />;
     } else if (current === '4') {
