@@ -1,3 +1,195 @@
 nodemon install --globally
 
 dont forget /api/ before calls
+
+react-dom.development.js:28439 Uncaught Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.
+
+Check the render method of `StaticLines`.
+    at createFiberFromTypeAndProps (react-dom.development.js:28439:1)
+    at createFiberFromElement (react-dom.development.js:28465:1)
+    at createChild (react-dom.development.js:15109:1)
+    at reconcileChildrenArray (react-dom.development.js:15404:1)
+    at reconcileChildFibers (react-dom.development.js:15821:1)
+    at reconcileChildren (react-dom.development.js:19167:1)
+    at updateContextProvider (react-dom.development.js:21154:1)
+    at beginWork (react-dom.development.js:21649:1)
+    at HTMLUnknownElement.callCallback (react-dom.development.js:4164:1)
+    at Object.invokeGuardedCallbackDev (react-dom.development.js:4213:1)
+createFiberFromTypeAndProps @ react-dom.development.js:28439
+createFiberFromElement @ react-dom.development.js:28465
+createChild @ react-dom.development.js:15109
+reconcileChildrenArray @ react-dom.development.js:15404
+reconcileChildFibers @ react-dom.development.js:15821
+reconcileChildren @ react-dom.development.js:19167
+updateContextProvider @ react-dom.development.js:21154
+beginWork @ react-dom.development.js:21649
+callCallback @ react-dom.development.js:4164
+invokeGuardedCallbackDev @ react-dom.development.js:4213
+invokeGuardedCallback @ react-dom.development.js:4277
+beginWork$1 @ react-dom.development.js:27451
+performUnitOfWork @ react-dom.development.js:26557
+workLoopSync @ react-dom.development.js:26466
+renderRootSync @ react-dom.development.js:26434
+performSyncWorkOnRoot @ react-dom.development.js:26085
+flushSyncCallbacks @ react-dom.development.js:12042
+commitRootImpl @ react-dom.development.js:26959
+commitRoot @ react-dom.development.js:26682
+finishConcurrentRender @ react-dom.development.js:25981
+performConcurrentWorkOnRoot @ react-dom.development.js:25809
+workLoop @ scheduler.development.js:266
+flushWork @ scheduler.development.js:239
+performWorkUntilDeadline @ scheduler.development.js:533
+react-dom.development.js:28439 Uncaught Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.
+
+Check the render method of `StaticLines`.
+    at createFiberFromTypeAndProps (react-dom.development.js:28439:1)
+    at createFiberFromElement (react-dom.development.js:28465:1)
+    at createChild (react-dom.development.js:15109:1)
+    at reconcileChildrenArray (react-dom.development.js:15404:1)
+    at reconcileChildFibers (react-dom.development.js:15821:1)
+    at reconcileChildren (react-dom.development.js:19167:1)
+    at updateContextProvider (react-dom.development.js:21154:1)
+    at beginWork (react-dom.development.js:21649:1)
+    at HTMLUnknownElement.callCallback (react-dom.development.js:4164:1)
+    at Object.invokeGuardedCallbackDev (react-dom.development.js:4213:1)
+createFiberFromTypeAndProps @ react-dom.development.js:28439
+createFiberFromElement @ react-dom.development.js:28465
+createChild @ react-dom.development.js:15109
+reconcileChildrenArray @ react-dom.development.js:15404
+reconcileChildFibers @ react-dom.development.js:15821
+reconcileChildren @ react-dom.development.js:19167
+updateContextProvider @ react-dom.development.js:21154
+beginWork @ react-dom.development.js:21649
+callCallback @ react-dom.development.js:4164
+invokeGuardedCallbackDev @ react-dom.development.js:4213
+invokeGuardedCallback @ react-dom.development.js:4277
+beginWork$1 @ react-dom.development.js:27451
+performUnitOfWork @ react-dom.development.js:26557
+workLoopSync @ react-dom.development.js:26466
+renderRootSync @ react-dom.development.js:26434
+recoverFromConcurrentError @ react-dom.development.js:25850
+performSyncWorkOnRoot @ react-dom.development.js:26096
+flushSyncCallbacks @ react-dom.development.js:12042
+commitRootImpl @ react-dom.development.js:26959
+commitRoot @ react-dom.development.js:26682
+finishConcurrentRender @ react-dom.development.js:25981
+performConcurrentWorkOnRoot @ react-dom.development.js:25809
+workLoop @ scheduler.development.js:266
+flushWork @ scheduler.development.js:239
+performWorkUntilDeadline @ scheduler.development.js:533
+react-dom.development.js:18687 The above error occurred in the <Context.Provider> component:
+
+    at div
+    at MapContainerComponent (http://localhost:3000/static/js/bundle.js:144528:5)
+    at StaticLines (http://localhost:3000/static/js/bundle.js:1047:5)
+    at div
+    at main
+    at http://localhost:3000/static/js/bundle.js:10801:25
+    at http://localhost:3000/static/js/bundle.js:10784:66
+    at section
+    at http://localhost:3000/static/js/bundle.js:10815:63
+    at http://localhost:3000/static/js/bundle.js:10784:66
+    at section
+    at http://localhost:3000/static/js/bundle.js:10815:63
+    at http://localhost:3000/static/js/bundle.js:10784:66
+    at Router (http://localhost:3000/static/js/bundle.js:114969:15)
+    at BrowserRouter (http://localhost:3000/static/js/bundle.js:113301:5)
+    at App (http://localhost:3000/static/js/bundle.js:101:84)
+
+Consider adding an error boundary to your tree to customize error handling behavior.
+Visit https://reactjs.org/link/error-boundaries to learn more about error boundaries.
+logCapturedError @ react-dom.development.js:18687
+update.callback @ react-dom.development.js:18720
+callCallback @ react-dom.development.js:13923
+commitUpdateQueue @ react-dom.development.js:13944
+commitLayoutEffectOnFiber @ react-dom.development.js:23391
+commitLayoutMountEffects_complete @ react-dom.development.js:24688
+commitLayoutEffects_begin @ react-dom.development.js:24674
+commitLayoutEffects @ react-dom.development.js:24612
+commitRootImpl @ react-dom.development.js:26823
+commitRoot @ react-dom.development.js:26682
+performSyncWorkOnRoot @ react-dom.development.js:26117
+flushSyncCallbacks @ react-dom.development.js:12042
+commitRootImpl @ react-dom.development.js:26959
+commitRoot @ react-dom.development.js:26682
+finishConcurrentRender @ react-dom.development.js:25981
+performConcurrentWorkOnRoot @ react-dom.development.js:25809
+workLoop @ scheduler.development.js:266
+flushWork @ scheduler.development.js:239
+performWorkUntilDeadline @ scheduler.development.js:533
+react-dom.development.js:28439 Uncaught Error: Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: undefined. You likely forgot to export your component from the file it's defined in, or you might have mixed up default and named imports.
+
+Check the render method of `StaticLines`.
+    at createFiberFromTypeAndProps (react-dom.development.js:28439:1)
+    at createFiberFromElement (react-dom.development.js:28465:1)
+    at createChild (react-dom.development.js:15109:1)
+    at reconcileChildrenArray (react-dom.development.js:15404:1)
+    at reconcileChildFibers (react-dom.development.js:15821:1)
+    at reconcileChildren (react-dom.development.js:19167:1)
+    at updateContextProvider (react-dom.development.js:21154:1)
+    at beginWork (react-dom.development.js:21649:1)
+    at beginWork$1 (react-dom.development.js:27426:1)
+    at performUnitOfWork (react-dom.development.js:26557:1)
+createFiberFromTypeAndProps @ react-dom.development.js:28439
+createFiberFromElement @ react-dom.development.js:28465
+createChild @ react-dom.development.js:15109
+reconcileChildrenArray @ react-dom.development.js:15404
+reconcileChildFibers @ react-dom.development.js:15821
+reconcileChildren @ react-dom.development.js:19167
+updateContextProvider @ react-dom.development.js:21154
+beginWork @ react-dom.development.js:21649
+beginWork$1 @ react-dom.development.js:27426
+performUnitOfWork @ react-dom.development.js:26557
+workLoopSync @ react-dom.development.js:26466
+renderRootSync @ react-dom.development.js:26434
+recoverFromConcurrentError @ react-dom.development.js:25850
+performSyncWorkOnRoot @ react-dom.development.js:26096
+flushSyncCallbacks @ react-dom.development.js:12042
+commitRootImpl @ react-dom.development.js:26959
+commitRoot @ react-dom.development.js:26682
+finishConcurrentRender @ react-dom.development.js:25981
+performConcurrentWorkOnRoot @ react-dom.development.js:25809
+workLoop @ scheduler.development.js:266
+flushWork @ scheduler.development.js:239
+performWorkUntilDeadline @ scheduler.development.js:533
+StaticLines.jsx:149 Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'length')
+    at getData (StaticLines.jsx:149:1)
+getData @ StaticLines.jsx:149
+await in getData (async)
+(anonymous) @ StaticLines.jsx:16
+commitHookEffectListMount @ react-dom.development.js:23150
+commitPassiveMountOnFiber @ react-dom.development.js:24926
+commitPassiveMountEffects_complete @ react-dom.development.js:24891
+commitPassiveMountEffects_begin @ react-dom.development.js:24878
+commitPassiveMountEffects @ react-dom.development.js:24866
+flushPassiveEffectsImpl @ react-dom.development.js:27039
+flushPassiveEffects @ react-dom.development.js:26984
+performSyncWorkOnRoot @ react-dom.development.js:26076
+flushSyncCallbacks @ react-dom.development.js:12042
+commitRootImpl @ react-dom.development.js:26959
+commitRoot @ react-dom.development.js:26682
+finishConcurrentRender @ react-dom.development.js:25981
+performConcurrentWorkOnRoot @ react-dom.development.js:25809
+workLoop @ scheduler.development.js:266
+flushWork @ scheduler.development.js:239
+performWorkUntilDeadline @ scheduler.development.js:533
+StaticLines.jsx:149 Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'length')
+    at getData (StaticLines.jsx:149:1)
+getData @ StaticLines.jsx:149
+await in getData (async)
+(anonymous) @ StaticLines.jsx:16
+commitHookEffectListMount @ react-dom.development.js:23150
+invokePassiveEffectMountInDEV @ react-dom.development.js:25154
+invokeEffectsInDev @ react-dom.development.js:27351
+commitDoubleInvokeEffectsInDEV @ react-dom.development.js:27330
+flushPassiveEffectsImpl @ react-dom.development.js:27056
+flushPassiveEffects @ react-dom.development.js:26984
+performSyncWorkOnRoot @ react-dom.development.js:26076
+flushSyncCallbacks @ react-dom.development.js:12042
+commitRootImpl @ react-dom.development.js:26959
+commitRoot @ react-dom.development.js:26682
+finishConcurrentRender @ react-dom.development.js:25981
+performConcurrentWorkOnRoot @ react-dom.development.js:25809
+workLoop @ scheduler.development.js:266
+flushWork @ scheduler.development.js:239
+performWorkUntilDeadline @ scheduler.development.js:533
