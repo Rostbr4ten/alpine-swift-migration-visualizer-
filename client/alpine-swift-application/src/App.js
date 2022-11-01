@@ -5,11 +5,12 @@ import {
   CommentOutlined,
   LineOutlined,
   LogoutOutlined,
+  PushpinOutlined,
 } from '@ant-design/icons';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Layout, Menu, Switch, Drawer, Button, Select } from 'antd';
 import React, { useState, useEffect } from 'react';
-import { StaticLines, Lines, Welcome, PathLines } from './pages';
+import { StaticLines, Lines, Welcome, PathLines, Marker } from './pages';
 import { Datepicker } from './components';
 import api from './api'
 const { Header, Content, Footer, Sider } = Layout;
@@ -19,6 +20,7 @@ const items = [
   { label: 'Static Lines', key: '2', icon: <LineOutlined /> }, // which is required
   { label: 'Moving Lines', key: '3', icon: <ArrowsAltOutlined /> }, // which is required
   { label: 'PathLines', key: '4', icon: <LogoutOutlined /> }, // which is required
+  { label: 'Marker', key: '5', icon: <PushpinOutlined /> }, // which is required
 ];
 
 const App = () => {
@@ -75,6 +77,8 @@ const App = () => {
       return <Lines filter={birdF} />;
     } else if (current === '4') {
       return <PathLines filter={birdF} />;
+    } else if (current === '5') {
+      return <Marker filter={birdF} />;
     }
   };
 
