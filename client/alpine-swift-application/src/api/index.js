@@ -6,6 +6,7 @@ const api = axios.create({
 
 export const getBirdRoutes = () => api.get(`/birdRoutes`);
 export const getBirdFilters = () => api.get(`/birdFilters`)
+export const getBirdYears = () => api.get(`/birdYears`)
 export const getBirdPaths = () => api.get(`/birdPaths`)
 //export const insertFormOne = payload => api.post(`/insertFormOne`, payload)
 
@@ -13,7 +14,8 @@ export const getBirdPaths = () => api.get(`/birdPaths`)
 const apis = {
     getBirdRoutes,
     getBirdFilters,
-    getBirdPaths
+    getBirdPaths,
+    getBirdYears
 }
 
 export default apis

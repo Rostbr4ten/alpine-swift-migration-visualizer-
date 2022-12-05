@@ -17,7 +17,7 @@ const { Header, Content, Footer, Sider } = Layout;
 const { Option, OptGroup } = Select;
 const items = [
   { label: 'Welcome', key: '1', icon: <CommentOutlined /> }, // remember to pass the key prop
-  { label: 'Static Lines', key: '2', icon: <LineOutlined /> }, // which is required
+  //{ label: 'Static Lines', key: '2', icon: <LineOutlined /> }, // which is required
   { label: 'Moving Lines', key: '3', icon: <ArrowsAltOutlined /> }, // which is required
   { label: 'PathLines', key: '4', icon: <LogoutOutlined /> }, // which is required
   { label: 'Marker', key: '5', icon: <PushpinOutlined /> }, // which is required
@@ -50,9 +50,11 @@ const App = () => {
     localStorage.getItem('current') || '1'
   );
   const [birds, setBirds] = useState([]);
+  const [years, setYears] = useState([]);
 
   useEffect(() => {
     getBirds();
+    getYears();
   }, []);
 
   const getBirds = async () => {
@@ -66,6 +68,19 @@ const App = () => {
       }))
     );
   };
+
+const getYears = async () => {
+    const res = await api.getBirdYears();
+    //console.log("InGetData");
+    //console.log(res.data.data);
+    setYears(
+      res.data.data.map((row) => ({
+        //Csv needs those names on the right side
+        year: row
+      }))
+    );
+  };
+
 
 
   const displayComponent = () => {
@@ -130,14 +145,13 @@ const App = () => {
                     width: 200,
                   }}
                   onChange={handleChangeSelect}
+                  defaultValue={birdF}
                 >
                   <OptGroup label="Bird">
                     {birds.map((item, index) => <Select.Option value={item.bird} key={index}>{item.bird}</Select.Option>)}
                   </OptGroup>
                   <OptGroup label="Year">
-                    <Option value="2014-2015">2014 - 2015</Option>
-                    <Option value="2015-2016">2015 - 2016</Option>
-                    <Option value="2016-2017">2016 - 2017</Option>
+                  {years.map((item, index) => <Select.Option value={item.year} key={index}>{item.year}</Select.Option>)}
                   </OptGroup>
                 </Select>
                 <Button type='primary' block onClick={() => window.location.reload(false)}>
@@ -161,3 +175,9 @@ const App = () => {
 export default App;
 
 // <Datepicker /> in Drawer
+
+/*
+                    <Option value="2014-2015">2014 - 2015</Option>
+                    <Option value="2015-2016">2015 - 2016</Option>
+                    <Option value="2016-2017">2016 - 2017</Option>
+                    */

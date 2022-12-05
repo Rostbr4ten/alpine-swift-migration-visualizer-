@@ -59,10 +59,10 @@ const Lines = ({ filter }) => {
     return (
         <Globe
             ref={globeEl}
-            globeImageUrl="https://raw.githubusercontent.com/chrisrzhou/react-globe/main/textures/globe.jpg"
-            backgroundImageUrl="https://raw.githubusercontent.com/chrisrzhou/react-globe/main/textures/background_milky_way.jpg"
-            //globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
-            //backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
+            //globeImageUrl="https://raw.githubusercontent.com/chrisrzhou/react-globe/main/textures/globe.jpg"
+            //backgroundImageUrl="https://raw.githubusercontent.com/chrisrzhou/react-globe/main/textures/background_milky_way.jpg"
+            globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
+            backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
             /*            
             globeImageUrl="..\..\..\..\..\server\storedData\earth-night.jpg"
             backgroundImageUrl="..\..\..\..\..\server\storedData\night-sky.png"

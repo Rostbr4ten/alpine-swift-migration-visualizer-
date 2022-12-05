@@ -56,7 +56,8 @@
 }
 
 .site-layout .site-layout-background {
-  height: 450px;
+  height: "20%";
+  width: "40%";
   margin: 25px;
   background: #fff;
 }

@@ -76,8 +76,10 @@ const PathLines = ({ filter }) => {
     return (
         <Globe
             bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
-            globeImageUrl="https://raw.githubusercontent.com/chrisrzhou/react-globe/main/textures/globe.jpg"
-            backgroundImageUrl="https://raw.githubusercontent.com/chrisrzhou/react-globe/main/textures/background_milky_way.jpg"
+            //globeImageUrl="https://raw.githubusercontent.com/chrisrzhou/react-globe/main/textures/globe.jpg"
+            //backgroundImageUrl="https://raw.githubusercontent.com/chrisrzhou/react-globe/main/textures/background_milky_way.jpg"
+            globeImageUrl="//unpkg.com/three-globe/example/img/earth-night.jpg"
+            backgroundImageUrl="//unpkg.com/three-globe/example/img/night-sky.png"
             pathsData={[data]} // pathsData expects array of array
             //pathLabel={'timestamp'}
             pathColor={() => ['rgba(0,0,255,0.6)', 'rgba(255,0,0,0.6)']}

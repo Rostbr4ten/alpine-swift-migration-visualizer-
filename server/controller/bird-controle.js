@@ -26,7 +26,7 @@ getBirdRoutes = (req, res) => {
                     var tmpRoute = {
                         lat1: resultObject[i].latitude, lng1: resultObject[i].longitude,
                         lat2: resultObject[i + 1].latitude, lng2: resultObject[i + 1].longitude,
-                        time: resultObject[i].tagLocalIdentifier + ": " + resultObject[i].timestamp,
+                        time: resultObject[i].tagLocalIdentifier + ": " + resultObject[i].timestamp + " <-> " + resultObject[i + 1].timestamp,
                         tagLocalIdentifier: resultObject[i].tagLocalIdentifier
                     };
                     birdRoutes.push(tmpRoute);
@@ -84,8 +84,28 @@ getBirdFilterPossibilities = (req, res) => {
         });
 }
 
+getYearFilterPossibilities = (req, res) => {
+    var resultObject = [];
+    const years = new Set();
+    const yearsCombined = [];
+    fs.createReadStream("./storedData/BirdsSwitzerland_0.csv")
+        .pipe(csv())
+        .on("data", (data) => resultObject.push(data))
+        .on("end", () => {
+            for (let i = 0; i < (resultObject.length - 1); i++) {
+                years.add(resultObject[i].timestamp.slice(0, 4));
+            }
+            const helper = Array.from(years);
+            for (let j = 0; j < (Array.from(years)).length - 1; j++) {
+                yearsCombined.push(helper[j] + "-" + helper[j+1]);
+            }
+            return res.status(200).json({ success: true, data: yearsCombined });
+        });
+}
+
 module.exports = {
     getBirdRoutes,
     getBirdPaths,
-    getBirdFilterPossibilities
+    getBirdFilterPossibilities,
+    getYearFilterPossibilities
 }

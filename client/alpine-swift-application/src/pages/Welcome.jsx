@@ -6,7 +6,8 @@ const Welcome = () => {
 
     return (
         <video
-        height={'200%'}
+        height={350}
+        width={1080}
             className='videoTag' autoPlay loop muted>
             <source src={sample} type='video/webm' />
         </video>
