@@ -5,10 +5,12 @@ var util = require('util');
 const fs = require("fs");
 const csv = require("csv-parser");
 
+const csvName = "./storedData/BirdsSwitzerland_0.csv";
+
 getBirdRoutes = (req, res) => {
     var resultObject = [];
     var birdRoutes = [];
-    fs.createReadStream("./storedData/BirdsSwitzerland_0.csv")
+    fs.createReadStream(csvName)
         .pipe(csv())
         .on("data", (data) => resultObject.push(data))
         .on("end", () => {
@@ -44,7 +46,7 @@ getBirdRoutes = (req, res) => {
 getBirdPaths = (req, res) => {
     var resultObject = [];
     var birdRoutes = [];
-    fs.createReadStream("./storedData/BirdsSwitzerland_0.csv")
+    fs.createReadStream(csvName)
         .pipe(csv())
         .on("data", (data) => resultObject.push(data))
         .on("end", () => {
@@ -73,7 +75,7 @@ getBirdPaths = (req, res) => {
 getBirdFilterPossibilities = (req, res) => {
     var resultObject = [];
     const tagLocalIdentifier = new Set();
-    fs.createReadStream("./storedData/BirdsSwitzerland_0.csv")
+    fs.createReadStream(csvName)
         .pipe(csv())
         .on("data", (data) => resultObject.push(data))
         .on("end", () => {
@@ -88,7 +90,7 @@ getYearFilterPossibilities = (req, res) => {
     var resultObject = [];
     const years = new Set();
     const yearsCombined = [];
-    fs.createReadStream("./storedData/BirdsSwitzerland_0.csv")
+    fs.createReadStream(csvName)
         .pipe(csv())
         .on("data", (data) => resultObject.push(data))
         .on("end", () => {
