@@ -13,9 +13,9 @@ This visualizer aims to visualize the migratory routes of the birds and the migr
 **Path Lines**: need less ressources then *Moving Lines*.
 **Marker**: Only marks the GPS position of the given timestamps.     
 
-![movingLines](images/movingLines.png)    
-![pathLines](images/pathLines.png)    
-![marker](images/marker.png)
+![movingLines](client/alpine-swift-application/images/movingLines.png)    
+![pathLines](client/alpine-swift-application/images/pathLines.png)    
+![marker](client/alpine-swift-application/images/marker.png)
 
 ## Necessary tools installed:
 
