@@ -98,6 +98,8 @@ getYearFilterPossibilities = (req, res) => {
                 years.add(resultObject[i].timestamp.slice(0, 4));
             }
             const helper = Array.from(years);
+            // In case the years arent' correct:
+            //helper = sort(helper);
             for (let j = 0; j < (Array.from(years)).length - 1; j++) {
                 yearsCombined.push(helper[j] + "-" + helper[j+1]);
             }
